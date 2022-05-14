@@ -1,0 +1,305 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <title>AW STORE</title>
+
+</head>
+
+<body>
+    <header class="menu-principal">
+        <main>
+            <div class="header-1">
+                <div class="logo">
+                    <img src="./img/LOGO AW STORE.png" />
+
+                </div>
+                <div class="redes-sociais">
+                    <ul>
+                        <li>
+                            <a href="https://www.instagram.com/awstoreofc/" target="_blank">
+                                <img src="./img/insta.png" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/awstoreooficial" target="_blank">
+                                <img src="./img/face.png" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/5518988060985"
+                                text="Olá venho atráves do site AWSTORE , estou enteressado em seus produtos!!"
+                                target="_blank">
+                                <img src="./img/zap.png" />
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+            </div>
+        </main>
+    </header>
+    </div>
+
+    </div>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Pagina Inicial</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="text-center">Entre com seu login!</h2>
+				<form action="cadastrar.php" method="post">
+				<div class="form-group">
+				<input class="form-control" type="email" name="email" placeholder="Digite seu e-mail">
+				</div>
+				<div class="form-group">
+				<input class="form-control" type="password" name="senha" placeholder="Senha">
+				</div>
+				<div class="form-group">
+				<input class="form-control btn btn-dark" type="submit" name="btn_entrar" value="Entrar">
+				</div>
+	</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<?php 
+//função para criar um CARD
+function card($url,$nome,$descricao,$preco)
+{
+	//utilizamos o PONTO .  para concatenar, ele tem a função do +
+	echo '<div class="col-xl-4 text-center col-sm-6 col-md-6 col-lg-4">
+			<img src="'.
+			$url.'" alt="...">
+				<h2>'.$nome.'</h2>
+			<p>'.$descricao.'</p>
+			<h3>'.$preco.'</h3>
+		</div>';
+}
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+     conexao php
+
+<?php
+//função para conectar no banco de dados      
+function get_conexao(){ 
+
+	//nome do servidor onde está o banco de dados
+	$servidor = 'localhost';
+	//variável com o nome do banco de dados
+	$nome_banco_dados = 'cadastro';
+	//variável com o nome de usuário do BD
+	$usuario = 'root';
+	//senha do BD
+	$senha = 'senac2019';
+
+	//abrimos a conexão com o BD e colocamos essa conexão na variável $conexaoDB
+    $conexaoDB = new PDO("mysql:host=$servidor;dbname=$nome_banco_dados", $usuario, $senha);
+
+    //configuramos a conexão para gerar um ERRO quando algum script SQL não executar com sucesso
+    $conexaoDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //ATTR_ERRMODE atributo quando der erro é gerar uma excessão ERRMODE_EXCEPTION
+
+    //configuramos o BD no modo UTF8
+    $conexaoDB->exec("set names utf8");
+    
+    //retorna a conexão feita no BD
+    return $conexaoDB;
+}
+
+//função para executar um select no banco de dados
+//exige um parâmetro chamado $script que deverá conter o script SELECT
+function executar_select($script){
+	//criamos uma variável $con que receberá a conexão aberta com o BD
+	$con = get_conexao();
+	//criamos uma outra variável $sql que irá preparar a conexão para a execução do script
+	$sql = $con->prepare($script);
+	//a variável $sql executará o script no banco de dados
+	$sql->execute();
+	//a função retornará todo o resultado obtido pela variável $sql
+	return $sql->fetchAll(); //fetchAll buscar tudo
+}
+?>
+
+
+
+
+
+
+
+
+
+
+      cadastrar php
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cadastro</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ 
+	<style type="text/css">
+		
+		.espaco{
+			padding-top: 30px;
+		}
+	</style>
+
+<?php 
+//Linha com o arquivo conexão.php
+require_once "./conexao.php";
+?>
+
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-4"></div>
+		<div class="col-4 espaco">
+			
+		<?php 
+		/*echo '<h2>Cadastrado</h2>';
+		
+		echo 'valor dentro da posição email ';
+		echo $_POST['email'];
+
+		echo '<h2>Sua senha é: </h2>';
+		echo $_POST['senha'];*/
+
+		//$consulta = executar_select(
+		//	"SELECT * FROM usuario WHERE email = '".$_POST['email']."'");
+
+		$conexao = get_conexao();
+		$sql = $conexao->prepare(
+			'SELECT * FROM usuario WHERE email = :email');
+		$sql->bindParam(':email', $_POST['email']);
+		$sql->execute();
+		$consulta = $sql->fetchAll();
+
+		if (count($consulta) == 0)
+		{
+			echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			  		<strong>Oops!</strong> E-mail inválido.
+			  		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+			  		</button></div>';
+		}
+		else if ($consulta[0]['senha'] != $_POST['senha']) 
+		{
+			echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+	  		<strong>Oops!</strong> Senha inválida.
+	  		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	    	<span aria-hidden="true">&times;</span>
+	  		</button></div>';
+		}
+		else{
+			echo '<div class="alert alert-success" role="alert">
+ 				 Você entrou. Seja bem vindo!
+					</div>';
+		}
+	 ?>
+	
+	</div>
+	<div class="col-4"></div>
+	</div>
+</div>
+	
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

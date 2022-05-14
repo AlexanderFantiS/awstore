@@ -1,0 +1,45 @@
+
+tag para quando passar o mouse mudar de cor
+.menu a:houver{
+
+}
+
+
+img{
+    margin: 6 auto;
+    width: 110px;
+    height: 72%;
+}
+
+
+
+header{
+    margin:  -20px auto;
+    width: 1000px ;
+    margin-top: 0 auto ;
+}
+
+
+<div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="text-center">Entre com seu login</h2>
+                            <form action="cadastrar.php" method="post">
+                                <div class="form-group">
+                                    <input class="form-control" type="email" name="email"
+                                        placeholder="Digite seu e-mail">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="senha" placeholder="Senha">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control btn btn-dark" type="submit" name="btn_entrar"
+                                        value="Entrar">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control btn" type="submit" name="cadastrar" value="Cadastrar">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>

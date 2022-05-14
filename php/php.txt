@@ -1,0 +1,11 @@
+//php 
+//personal home page
+//variaveis 
+//variavel da variavel
+//concatenar
+//comparar valores
+//>= <= == !=
+//=== !==
+//looping
+//funções
+//classes
